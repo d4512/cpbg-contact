@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+	CompaniesList
+{% endblock %}
+
+{% block jumbo %}
+	Companies
+{% endblock %}
+
+{% block description %}
+	List of Companies
+{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>List of Companies</h3>
+		</div><!--panel-heading-->
+		<div class="panel-body">
+			{% if companies %}
+				<table class="table table-hover">
+					{% for company in companies %}
+						<tr>
+							<td>
+								<a href="../company/{{ company.id }}/">
+									{{ company }}
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+				{% include "pagination.html" with page=companies %}
+			{% else %}
+				<p>No company found</p>
+			{% endif %}
+		</div><!--panel-body-->
+	</div><!--panel-->
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}

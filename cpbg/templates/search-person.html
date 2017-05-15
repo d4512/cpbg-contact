@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Search
+		{% if query %}
+			Results
+		{% endif %}
+{% endblock %}
+
+{% block jumbo %}
+	Person(s)		
+{% endblock %}
+
+{% block description %}
+	{% if query %}
+		Results for
+	{% endif %}
+	{{ query|escape }}
+{% endblock %}
+
+{% block content %}
+	Search Person
+	<form action="." method="GET">
+		<label for="q">Search: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search">
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		<div class="container">
+		{% if results %}
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Company</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for person in results %}
+					<tr>
+						<td>
+							<a href="../person/{{person.id}}/">
+								{{ person }}
+							</a>
+						</td>
+						<td>
+							<a href="../company/{{person.company_of_person.id}}/">
+								{{person.company_of_person}}
+							</a>
+						</td>
+					</tr>	
+				{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No person found</p>
+		{% endif %}
+		</div>
+	{% endif %}
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='..' %}
+{% endblock %}
+

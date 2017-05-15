@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+	CategoriesList
+{% endblock %}
+
+{% block jumbo %}
+	Categories
+{% endblock %}
+
+{% block description %}
+	Categories for Companies
+{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>List of Categories</h3>
+		</div><!--panel-heading-->
+		<div class="panel-body">
+			{% if categories %}
+				<table class="table table-hover">
+					{% for category in categories %}
+						<tr>
+							<td>
+								<a href="../category/{{ category.id }}/">
+									{{ category }}
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			{% else %}
+				<p>No category found</p>
+			{% endif %}
+		</div><!--panel-body-->
+		<div class="panel-footer">
+		</div><!--panel-footer-->
+	</div><!--panel-->
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}

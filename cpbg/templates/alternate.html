@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}
+	AlternateView
+{% endblock %}
+
+{% block jumbo %}
+	Contacts
+{% endblock %}
+
+{% block description %}
+	Contacts of CPBG
+{% endblock %}
+
+{% block content %}
+	<style>
+		.dropdown-submenu {
+			position: relative;
+		}
+
+		.dropdown-submenu .dropdown-menu {
+			top: 0;
+			left: 100%;
+			margin-top: -1px;
+		}
+	</style>
+
+	<div class="alert alert-warning">
+			Top 10 search results will appear in the drop-down list. Number in the circle indicates total count.
+	</div><!--alert-->
+
+	<div class="dropdown">
+		<button class="btn btn-default dropdown-toggle"
+			type="button" data-toggle="dropdown">
+			CPBG-Contacts<span class="caret"></span>
+		</button><!--level-0-->
+		<ul class="dropdown-menu"><!--level-1-->
+			<li class="dropdown-submenu">
+				<a class="test" tabindex="-1" href="#">
+					Categories 
+						<span class="badge">{{categories.count}}</span>
+						<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu"><!--level-2-->
+					<li class="dropdown-submenu">
+						{% for category in categories %}
+							<li>
+								<a href="../category/{{category.id}}/">
+									{{category}}
+								</a>
+							</li>
+						{% endfor %}
+					</li>
+				</ul>
+			</li>
+			<li class="dropdown-submenu">
+				<a class="test" tabindex="-1" href="#">
+					Companies
+						<span class="badge">{{number_of_companies}}</span>
+						<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu"><!--level-2-->
+					<li class="dropdown-submenu">
+						{% for company in top_10_companies %}
+							<li>
+								<a href="../company/{{company.id}}/">
+									{{company}}
+								</a>
+							</li>
+						{% endfor %}
+					</li>
+				</ul><!--ul-2-->
+			</li>
+			<li class="dropdown-submenu">
+				<a class="test" tabindex="-1" href="#">
+					Persons
+						<span class="badge">{{number_of_persons}}</span>
+						<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu"><!--level-2-->
+					<li class="dropdown-submenu">
+						{% for person in top_10_persons %}
+							<li>
+								<a href="../person/{{person.id}}/">
+									{{person}}
+								</a>
+							</li>
+						{% endfor %}
+					</li>
+				</ul><!--ul-2-->
+			</li>
+		</ul><!--ul-1-->
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+		  $('.dropdown-submenu a.test').on("click", function(e){
+			$(this).next('ul').toggle();
+			e.stopPropagation();
+			e.preventDefault();
+		  });
+		});
+	</script>
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}

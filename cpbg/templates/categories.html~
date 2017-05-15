@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Categories{% endblock %}
+{% block jumbo %}List of Categories for Companies{% endblock %}
+{% block content %}
+	{% if categories %}
+		<ul>
+			{% for category in categories %}
+				<li><a href=../category/{{ category.id }}>{{ category }}</a></l1>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>No category found</p>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+Feedaback
+{% endblock %}
+
+{% block jumbo %}
+Thank You
+{% endblock %}
+
+{% block description %}
+Thank you for spending your precious time
+{% endblock %}
+
+
+{% block content %}
+
+<div class="alert alert-success">
+    Your feedback has been registered for analysis.
+</div><!--alert-->
+
+<table class="table table-reflow table-bordered table-striped">
+    <tbody>
+    <tr>
+        <th scope="row">Query</th>
+        <td>{{data_request.query}}</td>
+    </tr>
+    <tr>
+        <th scope="row">Reason</th>
+        <td>
+            {% if data_request.reason == '1' %}
+            No Result
+            {% elif data_request.reason == '2' %}
+            Irrevalent Result(s)
+            {% elif data_request.reason == '3' %}
+            Too many results
+            {% endif %}
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block back %}
+{% include "back-link.html" with target='../..' %}
+{% endblock %}

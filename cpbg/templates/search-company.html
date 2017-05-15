@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Search
+		{% if query %}Results{% endif %}
+{% endblock %}
+
+{% block jumbo %}
+	Company(s)	
+{% endblock %}
+
+{% block description %}
+	{% if query %}
+		Results for
+	{% endif %}
+	{{ query|escape }}
+{% endblock %}
+
+{% block content %}
+	Search Company
+	<form action="." method="GET">
+		<label for="q">Search: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search">
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		{% if results %}
+			{% include "table-data.html" with data=results target='company' %}
+		{% else %}
+			<p>No company found</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='..' %}
+{% endblock %}
+

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+	E-mailsList
+{% endblock %}
+
+{% block jumbo %}
+	E-mails
+{% endblock %}
+
+{% block description %}
+	List of E-mails
+{% endblock %}
+
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>List of E-mails</h3>
+		</div><!--panel-heading-->
+		<div class="panel-body">
+			{% if emails %}
+				<table class="table table-hover table-bordered table-striped">
+					<thead>
+						<th>email Id</th>
+						<th>Name</th>
+						<th>Position</th>
+					</thead>
+					<tbody>
+						{% for email_id in emails %}
+							<tr>
+								<td>
+									{{email_id}}
+								</td>
+								<td>
+									{% if email_id.email_of_person %}
+										<a href="../person/{{email_id.email_of_person.id}}/">
+											{{email_id.email_of_person}}
+										</a>
+									{% endif %}
+								</td>
+								<td>
+									{% if email_id.email_of_position %}
+										<a href="../position/{{email_id.email_of_position.id}}/">
+											{{email_id.email_of_position}}
+										</a>
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% else %}
+				<p>No email found</p>
+			{% endif %}
+		</div><!--panel-body-->
+		<div class="panel-footer">
+		</div><!--panel-footer-->
+	</div><!--panel-->
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}

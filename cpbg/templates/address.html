@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{address.address_of_company}}-{{address.id}}
+{% endblock %}
+
+{% block jumbo %}
+	{{address.address_of_company}}
+{% endblock %}
+
+{% block description %}
+	Address {{address.id}}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<table class="table table-reflow table-bordered table-striped">
+			<tbody>
+				<tr>
+					<th scope="row">Full Address(s)</th>
+					<td>{{address}}</td>
+				</tr>
+				{% if positions %}
+				<tr>
+					<th scope="row">Position(s)</th>
+					<td>
+						{% include "table-data.html" with data=positions target='position' %}
+					</td>
+				</tr>
+				{% endif %}
+				{% if landlines %}
+					<tr>
+						<th scope="row">Landline(s)</th>
+						<td>
+							<ul>
+								{% for landline in landlines %}
+									<li>STD-code {{landline.std_for_landline}}
+										Numbers
+										{% if  landline.is_landline_for_fax %}
+											<b>Fax</b> :
+										{% endif %}
+										{{landline.landline_number}}
+									</li>
+								{% endfor %}
+							</ul>
+						</td>
+					</tr>
+				{% endif %}
+			</tbody>
+		</table>
+	</div><!--container-->
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}
+

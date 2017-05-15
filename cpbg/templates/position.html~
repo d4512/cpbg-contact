@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{position}}{% endblock %}
+{% block jumbo %}Details of {{position}}{% endblock %}
+{% block content %}
+
+	<p>Company : {{position.position_of_company}}</p>
+
+	{% if landlines %}
+		<p> Landline Numbers </p>
+		<ul>
+			{% for landline in landlines %}
+				<li>{{landline}}{{landline.is_landline_for_fax}}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	{% if persons %}
+		<p> Person(s) </p>
+		<ul>
+			{% for person in persons %}
+				<li><a href=../../person/{{person.id}}>{{person}}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	{% if emails %}
+		<p> Email(s) </p>
+		<ul>
+			{% for email_id in emails %}
+				<li>{{email_id}}@{{email_id.domain_of_email}}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

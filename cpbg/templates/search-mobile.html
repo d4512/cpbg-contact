@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Search
+		{% if query %}
+			Results
+		{% endif %}
+{% endblock %}
+
+{% block jumbo %}
+	Mobile(s)
+{% endblock %}
+
+{% block description %}
+	{% if query %}
+		Results for
+	{% endif %}
+	{{ query|escape }}
+{% endblock %}
+
+{% block content %}
+	Search Mobile Number
+	<form action="." method="GET">
+		<label for="q">Search: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search">
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		{% if results %}
+			<table class="table table-hover table-bordered table-striped">
+				<thead>
+					<th>Mobile</th>
+					<th>Name</th>
+					<th>Company</th>
+					<th>Position</th>
+					</thead>
+				<tbody>
+				{% for mobile in results %}
+					<tr>
+						<td>
+							{{ mobile }}
+						</td>
+						<td>
+							<a href="../person/{{mobile.mobile_of_person.id}}/">
+								{{mobile.mobile_of_person}}
+							</a>
+						</td>
+						<td>
+							<a href="../company/{{mobile.mobile_of_person.company_of_person.id}}/">
+								{{mobile.mobile_of_person.company_of_person}}
+							</a>
+						</td>
+						<td>
+							{% if mobile.mobile_of_person.person_for_position %}
+								<a href="../position/{{mobile.mobile_of_person.person_for_position.id}}/">
+									{{mobile.mobile_of_person.person_for_position}}
+								</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No mobile found</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='..' %}
+{% endblock %}
+

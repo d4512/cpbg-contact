@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block jumbo %}
+	Contacts
+{% endblock %}
+
+{% block description %}
+	Contacts of CPBG
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="text-center">
+			<form action="fuzzy/" class="form-search">
+				<div class="form-group">
+					<input type="text" name="q" value="{{ query|escape }}"
+						placeholder="Artificial Intelligence (beta)">
+					<button type="submit" class="btn btn-default">Fuzzy-Search</button>
+				</div>
+			</form>
+		</div>
+		<div class="col-lg-4 col-md-3 col-sm-3">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Browse From
+				</div><!--panel-heading-->
+				<div class="panel-body">
+					<div class="btn-group">
+						<a href="companies/" class="btn btn-info">Companies</a>
+						<a href="emails/" class="btn btn-info">E-mails</a>
+						<button class="btn btn-primary btn-warn dropdown-toggle" data-toggle="dropdown">
+							Category <span class="caret"></span>
+						</button>		
+						<ul class="dropdown-menu">
+							{% for category in categories %}
+								<li><a href="category/{{category.id}}/">{{category}}</a></li>
+							{% endfor %}
+							<li class="divider"></li>
+							<li><a href="categories/">List all</a>
+						</ul>
+					</div><!--btn-group-->
+				</div><!--panel-body-->
+			</div><!--panel-->
+		</div><!--col-md-3-->
+		<div class="col-lg-7 col-md-9 col-sm-9">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Search By</h4>
+				</div><!--panel-heading-->
+				<div class="panel-body">
+						<div class="tabbable">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab1" data-toggle="tab">Company</a>
+								</li>
+								<li><a href="#tab2" data-toggle="tab">Person</a></li>
+								<li><a href="#tab3" data-toggle="tab">PIN Code</a></li>
+								<li><a href="#tab4" data-toggle="tab">Mobile</a></li>
+								<li><a href="#tab5" data-toggle="tab">STD Code</a></li>
+							</ul><!--nav-tabs-->
+							<div class="tab-content">
+								<div class="tab-pane fade in active" id="tab1">
+									<form action="search-company/" method="GET" class="form-search">
+										<input type="text" name="q" value="{{ query|escape }}"
+											class="input-medium search-query"
+											placeholder="part or full CompanyName">
+										<button type="submit" class="btn">Search</button>
+										{% for company in companies %}
+											<a href="company/{{company.id}}/" class="btn">
+												{{company}}
+											</a>
+										{% endfor %}
+									</form>
+								</div><!--tab1-->
+								<div class="tab-pane fade" id="tab2">
+									<form action="search-person/" method="GET" class="form-search">
+										<input type="text" name="q" value="{{ query|escape }}"
+											class="input-medium search-qury"
+											placeholder="part or full Person Name">
+										<button type="submit" class="btn">Search</button> 
+										{% for person in persons %}
+											<a href="person/{{person.id}}/" class="btn">
+												{{person}}
+											</a>
+										{% endfor %}
+									</form>
+								</div><!--tab2-->
+								<div class="tab-pane fade" id="tab3">
+									<form action="search-PIN/" class="form-search">
+										<input type="text" name="q" value="{{ query|escape }}"
+											class="input-medium search-query"
+											placeholder="part or full PIN code">
+										<button type="submit" class="btn">Search</button>
+									</form>
+								</div><!--tab3-->
+								<div class="tab-pane fade" id="tab4">
+									<form action="search-mobile/" method="GET" class="form-search">
+										<input type="text" name="q" value="{{ query|escape }}"
+											class="input-medium search-qury"
+											placeholder="part or full Mobile Number">
+										<button type="submit" class="btn">Search</button>
+									</form>
+								</div><!--tab4-->
+								<div class="tab-pane fade" id="tab5">
+									<form action="search-STD/" class="form-search">
+										<input type="text" name="q" value="{{ query|escape }}"
+											class="input-medium search-query"
+											placeholder="type full STD code w/o 0">
+										<button type="submit" class="btn">Search</button>
+									</form>
+								</div><!--tab5-->								
+							</div><!--tab-content-->
+						</div><!--tabbable-->
+					</div><!--panel-body-->
+			</div><!--panel-->
+		</div><!--col-md-9-->
+	</div><!--row-->
+		<div class="alert alert-warning">
+			Remember to click on correct 
+				<abbr title="e.g. Person">Tab</abbr>
+			before clicking on Search. Top 3 searches shall appear as link.
+			{% load staticfiles %}
+			<a href="{% static "Help-CPBG-Contact_v1.0.pdf" %}" target=_blank>
+				<span class="glyphicon glyphicon-question-sign"></span>
+				Help
+			</a>
+		</div><!--alert-->
+	
+{% endblock %}
+
+{%block back %}
+	<p>
+		<br/>Not liking the look? Try alternative
+			<a href="alternate/">UI</a>
+		<br/>
+	</p>
+{% endblock %}
+

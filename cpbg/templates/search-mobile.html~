@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Search {% if query %}Results{% endif %}{% endblock %}
+{% block jumbo %}Search {% if query %}Results for{% endif %} {{ query|escape }}{% endblock %}
+{% block content %}
+	Search Mobile Number
+	<form action="." method="GET">
+		<label for="q">Search: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search">
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		{% if results %}
+			<ul>
+				{% for mobile in results %}
+					<li><a href=../person/{{mobile.id}}>{{ mobile }}</a></l1>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p>No mobile found</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+{% block back %}
+..
+{% endblock %}
+

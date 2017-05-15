@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Search {% if query %}Results{% endif %}{% endblock %}
+{% block jumbo %}Search {% if query %}Results for{% endif %} {{ query|escape }}{% endblock %}
+{% block content %}
+	Search Pincode or STDcode
+	<form action="." method="GET">
+		<label for="q1">Pincode: </label>
+		<input type="text" name="q1" value="{% if option %}{{ query|escape }}{% endif %}">
+		<input type="submit" value="Search"><br/>
+		<label for="q2">STDcode: </label>
+		<input type="text" name="q2" value="{% if not option %}{{ query|escape }}{% endif %}">
+		<input type="submit" value="Search">
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		{% if results %}
+			{% if option %}
+				<ul>
+					{% for address in results %}
+						<li><a href=../address/{{address.id}}>{{ address }}</a></li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<ul>
+					{% for landline in results %}
+						<li>
+							{% if  landline.is_landline_for_fax %}
+								<b>Fax</b> :
+							{% endif %}
+							{{ landline.landline_number }} :
+								<b>{{landline.landline_of_company}}</b>
+								{% if landline.landline_for_position %}<u>{{landline.landline_for_position}}</u>{% endif %}
+								{{landline.landline_in_address}}
+						</li>
+					{% endfor %}
+				</ul>				
+			{% endif %}
+		{% else %}
+			<p>No company found</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+{% block back %}
+..
+{% endblock %}
+

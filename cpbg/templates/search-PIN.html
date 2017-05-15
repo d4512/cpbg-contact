@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Search
+		{% if query %}
+			Results
+		{% endif %}
+{% endblock %}
+
+{% block jumbo %}
+	PIN code(s)
+{% endblock %}
+
+{% block description %}
+	{% if query %}
+		Results for
+	{% endif %}
+	{{ query|escape }}
+{% endblock %}
+
+{% block content %}
+	Search Pincode or STDcode
+	<form action="." method="GET">
+		<label for="q">Pincode: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search"><br/>
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		{% if results %}
+			<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Company</th>
+							<th>Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for address in results %}
+						<tr>
+							<td>
+								<a href="../company/{{address.address_of_company.id}}/">
+									{{address.address_of_company}}
+								</a>
+							</td>
+							<td>
+								<a href="../address/{{address.id}}/">
+									{{address}}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+		{% else %}
+			<p>No company found</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='..' %}
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category }}{% endblock %}
+{% block jumbo %}Company(s) under {{ category }} Category{% endblock %}
+{% block content %}
+	{% if companies %}
+		These are the following company(s) under <b>{{ category }}</b> category
+			<ul>
+				{% for company in companies %}
+					<li><a href=../../company/{{ company.id }}>{{company}}</a></l1>
+				{% endfor %}
+			</ul>
+	{% else %}
+		<p>No company found under this category</p>
+	{% endif %}
+{% endblock %}
+{% block back %}
+../..
+{% endblock %}

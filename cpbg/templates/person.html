@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{person}}
+{% endblock %}
+
+{% block jumbo %}
+	{{person}}
+{% endblock %}
+
+{% block description %}
+	Details of {{person}}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<table class="table table-reflow table-bordered table-striped">
+			<tbody>
+				
+				<tr>
+					<th scope="row">Company</th>
+					<td>
+						<ul>
+							<li>
+								<a href="../../../company/{{person.company_of_person.id}}/">
+									{{person.company_of_person}}
+								</a>
+							</li>
+						</ul>
+					</td>
+				</tr>
+				
+				<tr>
+					<th scope="row">Position</th>
+					<td>
+						{% if person.person_for_position %}
+							<ul>
+								<li>
+									{{person.person_for_position}}
+								</li>
+							</ul>
+						{% endif %}
+					</td>
+				</tr>
+				
+				{% if mobiles %}
+					<tr>
+						<th scope="row">Mobile(s)</th>
+						<td>
+							<ul>
+								{% for mobile in mobiles %}
+									<li>{{mobile}}</li>
+								{% endfor %}
+							</ul>
+						</td>
+					</tr>
+				{% endif %}
+				
+				{% if emails %}
+					<tr>
+						<th scope="row">Email(s)</th>
+						<td>
+							{% include "td-nolink.html" with data=emails %}
+						</td>
+					</tr>
+				{% endif %}
+				
+			</tbody>
+		</table>
+	</div><!--container-->
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{address.address_of_company}}-{{address.id}}{% endblock %}
+{% block jumbo %}Address ({{address.id}}) of {{address.address_of_company}}{% endblock %}
+{% block content %}
+	<p>Company Name : {{address.address_of_company}}</p>
+	<p>Full Address : <h4>{{address}}</h4></p>
+	<h2>
+	{% if positions %}
+		<p> Position(s) available at {{address.address_of_company}}-{{address.id}}</p>
+		<ul>
+			{% for position in positions %} 
+				<li><a href=../../position/{{position.id}}>{{position}}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	{% if landlines %}
+		<p> Landline(s) for {{address.address_of_company}}-{{address.id}}</p>
+		
+		<ul>
+			{% for landline in landlines %}
+				<li>STD-code {{landline.std_for_landline}} Numbers
+					{% if  landline.is_landline_for_fax %}
+					<b>Fax</b> :
+					{% endif %}
+					{{landline.landline_number}}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	</h2>
+{% endblock %}
+{% block back %}
+..
+{% endblock %}
+

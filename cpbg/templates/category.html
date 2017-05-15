@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category }}{% endblock %}
+{% block jumbo %}{{ category }}{% endblock %}
+{% block description %}Company(s) under {{ category }} Category{% endblock %}
+{% block content %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>List of Company(s)</h3>
+		</div><!--panel-heading-->
+		<div class="panel-body">
+			{% if companies %}
+				<table class="table table-hover">
+					{% for company in companies %}
+						<tr>
+							<td>
+								<a href="../../company/{{ company.id }}/">
+									{{company}}
+								</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+			{% else %}
+				<p>No company found under this category</p>
+			{% endif %}
+		</div><!--panel-body-->
+	</div><!--panel-->
+{% endblock %}
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}

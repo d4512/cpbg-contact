@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block jumbo %}Contacts{% endblock %}
+{% block description %}Contacts of CPBG{% endblock %}
+{% block content %}
+	<div class="row">
+		<div class="col-md-3 col-sm-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h5>Listing of Categories and Companies</h5>
+				</div><!--panel-heading-->
+				<div class="panel-body">
+						<div class="btn-group">
+							<a href="company.html" class="btn btn-info">List <small>all</small> companies</a>
+							<button class="btn btn-primary btn-warn dropdown-toggle" data-toggle="dropdown">
+								Choose category <span class="caret"></span>
+							</button>		
+							<ul class="dropdown-menu">
+								<li><a href="#">Category-1</a></li>
+								<li><a href="#">Category-2</a></li>
+								<li class="divider"></li>
+								<li><a href="person.html">List all</a>
+							</ul>
+						</div><!--btn-group-->
+					</div><!--panel-body-->
+			</div><!--panel-->
+		</div><!--col-md-3-->
+		<div class="col-md-9 col-sm-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Search By</h4>
+				</div><!--panel-heading-->
+				<div class="panel-body">
+						<div class="tabbable">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab1" data-toggle="tab">Company Name</a>
+								</li>
+								<li><a href="#tab2" data-toggle="tab">Person Name</a></li>
+								<li><a href="#tab3" data-toggle="tab">PIN Code</a></li>
+								<li><a href="#tab4" data-toggle="tab">Mobile Number</a></li>
+								<li><a href="#tab5" data-toggle="tab">STD Code</a></li>
+								<li><a href="#tab6" data-toggle="tab">eMail</a></li>
+							</ul><!--nav-tabs-->
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab1">
+									<form class="form-search">
+										<input type="text" class="input-medium search-query" placeholder="part or full CompanyName">
+										<button type="submit" class="btn">Search</button>
+										<a href="company.html" class="btn">Company-1</a>
+										<a href="company.html" class="btn">Company-2</a>
+										<a href="company.html" class="btn">Company-3</a>
+									</form>
+								</div><!--tab1-->
+								<div class="tab-pane" id="tab2">
+									<form class="form-search">
+										<input type="text" class="input-medium search-qury" placeholder="part or full Person Name">
+										<button type="submit" class="btn">Search</button> 
+										<a href="person.html" class="btn">Person-1</a>
+										<a href="person.html" class="btn">Person-2</a>
+										<a href="person.html" class="btn">Person-3</a>
+									</form>
+								</div><!--tab2-->
+								<div class="tab-pane" id="tab3">
+									<form class="form-search">
+										<input type="text" class="input-medium search-query" placeholder="part or full PIN code">
+										<button type="submit" class="btn">Search</button>
+										<a href="#" class="btn">PIN-1</a>
+										<a href="#" class="btn">PIN-2</a>
+										<a href="#" class="btn">PIN-3</a>
+									</form>
+								</div><!--tab3-->
+								<div class="tab-pane" id="tab4">
+									<form class="form-search">
+										<input type="text" class="input-medium search-query" placeholder="part or full Mobile Number">
+										<button type="submit" class="btn">Search</button>
+										<a href="#" class="btn">Mobile-1</a>
+										<a href="#" class="btn">Mobile-2</a>
+										<a href="#" class="btn">Mobile-3</a>
+									</form>
+								</div><!--tab4-->
+								<div class="tab-pane" id="tab5">
+									<form class="form-search">
+										<input type="text" class="input-medium search-query" placeholder="type full STD code w/o 0">
+										<button type="submit" class="btn">Search</button>
+										<a href="#" class="btn">STD-1</a>
+										<a href="#" class="btn">STD-2</a>
+										<a href="#" class="btn">STD-3</a>
+									</form>
+								</div><!--tab5-->
+								<div class="tab-pane" id="tab6">
+									<form class="form-search">
+										<input type="text" class="input-medium search-query">
+											@
+										<input type="text" class="input-medium search-query" placeholder="e.g. gmail.com">
+										<button type="submit" class="btn">Search</button> 
+									</form>
+								</div><!--tab6-->
+							</div><!--tab-content-->
+						</div><!--tabbable-->
+					</div><!--panel-body-->
+			</div><!--panel-->
+		</div><!--col-md-9-->
+	</div><!--row-->
+		<div class="alert alert-warning">
+			Remember to click on correct 
+				<abbr title="e.g. Person Name">Tab</abbr>
+			before clicking on Search. Top 3 searches shall appear as link.
+			<a href="#">
+				<span class="glyphicon glyphicon-question-sign"></span>
+				Help
+			</a>
+		</div><!--alert-->
+	
+{% endblock %}
+{%block back %}
+	<p>
+		<br/>Not liking the look? Try alternative UI<br/>
+	</p>
+{% endblock %}
+

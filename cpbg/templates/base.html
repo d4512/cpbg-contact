@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    	<title>{% block title %}My amazing site{% endblock %}</title>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    	<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
+    	<link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+    	<script src="{% static "jquery-3.1.1.min.js" %}"></script>
+    	<script src="{% static "bootstrap.min.js" %}"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="page-header">
+			<h1>{% block jumbo %}My amazing site{% endblock %}
+				<small>{% block description %}{% endblock %}</small>
+			</h1>
+		</div><!--page-header-->
+		{% block content %}{% endblock %}
+	</div><!--container-->
+	
+	<div class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container">
+			<p class="navbar-text pull-left">
+				version 1.0
+				&copy; BHEL 2017 -
+				Site Built By Subrata Sur.<br/>
+				Note: <em>Website may look different without internet connection</em>
+			</p>
+			{% block back %}{% endblock %}
+		</div><!--container-->
+	</div><!--navbar-->		
+</body>
+</html>

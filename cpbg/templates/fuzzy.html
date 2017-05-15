@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Search
+		{% if query %}Results{% endif %}
+{% endblock %}
+
+{% block jumbo %}
+	Fuzzy	
+{% endblock %}
+
+{% block description %}
+	{% if query %}
+		Results for
+	{% endif %}
+	{{ query|escape }}
+{% endblock %}
+
+{% block content %}
+	Search Fuzzy
+	<form action="." method="GET">
+		<label for="q">Fuzzy: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search">
+	</form>
+	{% if query %}
+			Results for "{{ query|escape }}":
+			
+		<ul class="nav nav-tabs">
+			<li class="active">
+				<a data-toggle="tab" href="#company">
+					Company
+						<span class="badge">
+							{{results_company.count}}
+						</span>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#person">
+					Person
+						<span class="badge">
+							{{results_person.count}}
+						</span>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#address">
+					Address
+						<span class="badge">
+							{{results_address.count}}
+						</span>
+				</a>
+			</li>
+			<li>
+				<a data-toggle="tab" href="#position">
+					Position
+						<span class="badge">
+							{{results_position.count}}
+						</span>
+				</a>
+			</li>
+		</ul>
+	
+	<div class="tab-content">
+		<div id="company" class="tab-pane fade in active">
+			{% if results_company %}
+				{% include "table-data.html" with data=results_company target='company' %}
+			{% endif %}
+		</div><!--company-->
+		<div id="person" class="tab-pane fade">
+			{% if results_person %}
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Company</th>
+							<th>Person</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for person in results_person %}
+						<tr>
+							<td>
+								<a href="../company/{{person.company_of_person.id}}/">
+									{{person.company_of_person}}
+								</a>
+							</td>
+							<td>
+								<a href="../person/{{person.id}}/">
+									{{person}}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+		</div><!--person-->
+		<div id="address" class="tab-pane fade">
+			{% if results_address %}
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Company</th>
+							<th>Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for address in results_address %}
+						<tr>
+							<td>
+								<a href="../company/{{address.address_of_company.id}}/">
+									{{address.address_of_company}}
+								</a>
+							</td>
+							<td>
+								<a href="../address/{{address.id}}/">
+									{{address}}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+		</div><!--address-->
+		<div id="position" class="tab-pane fade">
+			{% if results_position %}
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Company</th>
+							<th>Position</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for position in results_position %}
+						<tr>
+							<td>
+								<a href="../company/{{position.position_of_company.id}}/">
+									{{position.position_of_company}}
+								</a>
+							</td>
+							<td>
+								<a href="../position/{{position.id}}/">
+									{{position}}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endif %}
+		</div><!--position-->
+	</div><!--tab-content-->
+		
+	{% endif %}
+	
+	<form action="../../fuzzy-feedback/" method="GET" class="form-inline">
+					<input type="hidden" name="q" value="{{ query|escape }}">
+					<label for="reason">Not Happy? Reason for Un-Happiness:</label>
+					<select class="form-control" id="sel1">
+						<option value="1">No result</option>
+						<option value="2">Irrelevant Result(s)</option>
+						<option value="3">Too-Many Results</option>
+					</select>
+					<input type="submit" value="Submit Feedback">
+				</form>
+				
+				<div class="alert alert-warning">
+					Your Feedback is important to serve you better. Number in the circle indicates number of search-results.
+				</div><!--alert-->
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='..' %}
+{% endblock %}

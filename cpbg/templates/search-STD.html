@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Search
+	{% if query %}Results{% endif %}
+{% endblock %}
+
+{% block jumbo %}
+	STD code
+{% endblock %}
+
+{% block description %}
+	{% if query %}
+		Results for
+	{% endif %}
+	{{ query|escape }}
+{% endblock %}
+
+{% block content %}
+	Search Pincode or STDcode
+	<form action="." method="GET">
+		<label for="q">Pincode: </label>
+		<input type="text" name="q" value="{{ query|escape }}">
+		<input type="submit" value="Search"><br/>
+	</form>
+	{% if query %}
+		Results for "{{ query|escape }}":
+		{% if results %}
+			<table class="table table-hover table-bordered table-striped">
+				<thead>
+					<th>isFAX</th>
+					<th>Landline(s)</th>
+					<th>Company</th>
+					<th>Position</th>
+					<th>Address</th>
+					</thead>
+				<tbody>
+					{% for landline in results %}
+						<tr>
+							<td>
+								{% if  landline.is_landline_for_fax %}
+									<b>Fax</b>
+								{% endif %}
+							</td>
+							<td>
+								{{ landline.landline_number }}
+							</td>
+							 <td>
+								<b>{{landline.landline_of_company}}</b>
+							 </td>
+							 <td>
+								{% if landline.landline_for_position %}
+									<u>{{landline.landline_for_position}}</u>
+								{% endif %}
+							 </td>
+							<td>
+								{{landline.landline_in_address}}
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p>No company found</p>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+{% block back %}
+	{% include "back-link.html" with target='../..' %}
+{% endblock %}
+

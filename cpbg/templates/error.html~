@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %}Error{% endblock %}
+{% block jumbo %}Error Page{% endblock %}
+{% block content %}
+	An Error Occured
+{% endblock %}

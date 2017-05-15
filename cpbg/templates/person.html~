@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{person}}{% endblock %}
+{% block jumbo %}Details of {{person}}{% endblock %}
+{% block content %}
+	<p>Company : {{person.company_of_person}}</p>
+	<p>Position : {{person.person_for_position}}</p>	
+	{% if mobiles %}
+		<p> Mobile(s) </p>
+			<ul>
+				{% for mobile in mobiles %}
+					<li>{{mobile}}</li>
+				{% endfor %}
+			</ul>
+	{% endif %}
+
+	{% if emails %}
+		<p> Email(s) </p>
+			<ul>
+				{% for email_id in emails %}
+					<li>{{email_id}}@{{email_id.domain_of_email}}</li>
+				{% endfor %}
+			</ul>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ company }}{% endblock %}
+{% block jumbo %}Details of {{ company }}{% endblock %}
+{% block content %}
+	<p> {{ company }} falls under following category(s) </p>
+		<ul>
+			{% for category in categories %}
+				<li><a href=../../category/{{category.id}}>{{category}}</a></li>
+			{% endfor %}
+		</ul>
+
+	<p> Domain Name : {{company.domain_for_company}} </p>
+		
+
+	{% if positions %}
+		<o> Position(s) in {{ company }} </p>
+		<ul>
+			{% for position in positions %} 
+				<li><a href=../../position/{{position.id}}>{{position}}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	{% if persons %}
+		<p> Person(s) working for {{ company }} </p>
+			<ul>
+				{% for person in persons %} 
+					<li><a href=../../person/{{person.id}}>{{person}}</a></li>
+				{% endfor %}
+			</ul>
+	{% endif %}
+
+	{% if addresses %}
+		<p> Postal address(s) of {{ company }} </p>
+		<ul>
+			{% for address in addresses %} 
+				<li><a href=../../address/{{address.id}}>{{address}}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}
+{% block back %}
+../..
+{% endblock %}
